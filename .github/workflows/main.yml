@@ -1,33 +1,17 @@
-name: Python package
-on: [push]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # full history so bisect can move across commits
-
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      # optional but recommended
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
-
-      - name: Run automatic git bisect
-        env:
-          BAD_HASH: c1a4be04b972b6c17db242fc37752ad517c29402
-          GOOD_HASH: e4cfc6f77ebbe2e23550ddab682316ab4ce1c03c
-        run: python script.py
-
-      # (optional) upload the bisect log so you can view it in Actions
-      - name: Upload bisect log
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: bisect-log
-          path: bisect.log
+name: Python package 
+on: [push] 
+jobs: 
+    build: 
+      runs-on: ubuntu-latest 
+      steps:
+        - uses: actions/checkout@v3 
+          with: 
+            fetch-depth: 0
+        - name: Setup Python 
+          uses: actions/setup-python@v4 
+          with: 
+            python-version: "3.9" 
+        - name: Install packages 
+          run: pip install-r requirements.txt
+        - name: Run tests 
+          run: python manage.py test

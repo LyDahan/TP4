@@ -49,3 +49,4 @@ run("git bisect reset")
 
 # Propagate the bisect run's exit code (0 when it successfully found the first bad commit)
 sys.exit(rc >> 8)
+
